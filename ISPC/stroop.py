@@ -48,7 +48,7 @@ filename = _thisDir + os.sep + \
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
                                  extraInfo=expInfo, runtimeInfo=None,
-                                 originPath='/Users/HyunJoo/Documents/Yu-Chin Lab/ISPC_new/bin/stroop.py',
+                                 originPath='/Users/HyunJoo/Documents/Yu-Chin Lab/ISPC_new/stroop.py',
                                  savePickle=True, saveWideText=True,
                                  dataFileName=filename)
 # save a log file for detail verbose info
