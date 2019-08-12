@@ -67,4 +67,5 @@ while True:
     # if size(find(abs(nrT1-itemRep/2)<=1),1)==8
     # abs(nrT1-itemRep/2) <= 1 --> the abs value is always larger than 1
     if sum(x <= 1 for x in abs(nrT1 - itemRep/2)) == 8:
+        M1.to_csv("./MixedCCL_sequence.csv",index=False)
         break
