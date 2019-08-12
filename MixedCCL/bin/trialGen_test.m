@@ -19,7 +19,9 @@ conM (:,idx.stimSz) = reshape(ones(2,1)*[1 2 1 2],[],1);
 conM (:,idx.swProb) = reshape((ones(4,1)*[25 75]),[],1);
 conM (:,idx.stimId) = [1:8];
 conM (:,idx.stimCat)= reshape(ones(2,1)*[1 2 3 4],[],1);
+
 M=[];
+
 for i = 1:size(conM,1)
     sw = itemRep*(conM(i,idx.swProb))/100;
     rep  = itemRep - sw;
@@ -29,31 +31,29 @@ for i = 1:size(conM,1)
 end
 
 while 1,
-seq = Shuffle([1:size(M,1)]);
-M1=M(seq,:);
+    seq = Shuffle([1:size(M,1)]);
+    M1=M(seq,:);
 
-t=Shuffle([1 2]);
-currentTask=t(1);
+    t=Shuffle([1 2]);
+    currentTask=t(1);
 
-for i=1:size(M1,1)
-    if M1(i,idx.trialType)==1
-        currentTask=3-currentTask;
+    for i=1:size(M1,1)
+        if M1(i,idx.trialType)==1
+            currentTask=3-currentTask;
+        end
+        M1(i, idx.task)=currentTask;
     end
-    M1(i, idx.task)=currentTask;
-end
 
-for stimId=1:8
-    nrT1(stimId,1) = size(find(M1(:,idx.task)==1 & M1(:,idx.stimId)==stimId),1)
-end
+    for stimId=1:8
+        nrT1(stimId,1) = size(find(M1(:,idx.task)==1 & M1(:,idx.stimId)==stimId),1)
+    end
 
 
-exp=itemRep/2;
+    exp=itemRep/2;
 
-if size(find(abs(nrT1-itemRep/2)<=1),1)==8
-    break;
-end
-
-
+    if size(find(abs(nrT1-itemRep/2)<=1),1)==8
+        break;
+    end
 
 end
 
