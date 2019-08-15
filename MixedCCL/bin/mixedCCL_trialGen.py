@@ -33,7 +33,7 @@ def gen(SbjId):
 
     trPerStim = 40
 
-    E_all = []
+    E_all = pd.DataFrame()
     for bk in range(3):
         if order[bk] == 1: #low
             BkSwProb = 30
@@ -95,14 +95,11 @@ def gen(SbjId):
                 selection = E.loc[ (E[idx_stimId] == s) & (E[idx_task] == 1) ]
                 cnt.append(len(selection))
 
-#            if ( size(find(abs(cnt-expVal) <= 1), 1) == length(stimSet) ) & & ... # make sure each stim appears in each task roughly the same frequency
-#                    ( length( find( diff( E(:, idx_stimId) ) == 0 ) ) / length(E) <= .10 ) # make sure to not have too many same stim in two trials
-#                break
             stimCheck = np.diff(E[idx_stimId])
-            if (sum(x <= 1 for x in abs(np.subtract(cnt, expVal))) == len(stimSet)) & ((stimCheck == 0).sum() / len(E) <= 0.1):
+            if (sum(x <= 1 for x in abs(np.subtract(cnt, expVal))) == len(stimSet)) & ((stimCheck == 0).sum() / len(E) <= 0.15):
                 break
             
-        E_all = pd.DataFrame(E).reset_index(drop=True)
+        E_all = pd.concat([E_all,E], ignore_index=True)
 
     E_all.loc[ E_all[idx_stimCat] <= 2, idx_stimLv ] = 1 # living
     E_all.loc[ E_all[idx_stimCat] >= 3, idx_stimLv ] = 0
@@ -121,11 +118,19 @@ def gen(SbjId):
             else:
                 E_all.loc[i,idx_response] = SRmapping[3]
 
-
-    E_all.to_csv("./MixedCCL_trial_sequence.csv",index=False)
+    E_all.rename(columns={1:'stimLv',
+                          2:'stimSz',
+                          3:'stimCat',
+                          4:'stimId',
+                          5:'bkSwProb',
+                          6:'itSwProb',
+                          7:'trialType',
+                          8:'task',
+                          9:'response'}, inplace=True)
+    E_all.astype(int)
+    E_all.to_csv("./MixedCCL_trial_sequence_" + str(SbjId) + ".csv",index=False)
 
 
 if __name__ == '__main__':
-    SbjId = int(input(prompt="Subject ID: "))
+    SbjId = int(input("Subject ID: "))
     gen(SbjId)
-    
