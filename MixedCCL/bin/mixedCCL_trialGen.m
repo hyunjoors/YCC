@@ -1,4 +1,4 @@
-function trialSeq = trialGen(SbjId)	
+ function trialSeq = trialGen(SbjId)	
 order_all     = [1 2 3;3 2 1];
 SRmapping_all = [1 2 1 2;1 2 2 1;2 1 1 2; 2 1 2 1]; % which key to press for [large small living nonliving]
 incompCat_all = [2 3;1 4;1 4;2 3]; % based on SR mapping, what are the categories that are resp incompatible in the two tasks
