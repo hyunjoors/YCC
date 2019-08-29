@@ -1,9 +1,11 @@
+import sys
 import numpy as np
 import pandas as pd
+sys.path.insert(0, '../')
 
 def gen(SbjId):
 
-    
+    col_names = ['bk_id', 'trial_id', 'stimCat', 'stimId', 'bkSwProb', 'itSwProb', 'trialType', 'task', 'response']
     order_all = [['Low', 'Med', 'High'], ['Low', 'Med', 'High']]
     SRmapping_all = [['v','n', 'v', 'n'], ['v', 'n', 'n', 'v'], ['n', 'v', 'v', 'n'], ['n', 'v', 'n', 'v']] # which key to press for [large small living nonliving]
     incompCat_all = [['LivSm', 'NLvLg'], ['LivLg', 'NLvSm'], ['LivLg', 'NLvSm'], ['LivSm', 'NLvLg']] # based on SR mapping, what are the categories that are resp incompatible in the two tasks
@@ -18,7 +20,7 @@ def gen(SbjId):
     incompCat = incompCat_all[np.remainder(SbjId, 4)]
     
     trPerStim = 40 # trial per stimulus
-    E_all = pd.DataFrame(columns=['bk_id', 'trial_id', 'stimCat', 'stimId', 'bkSwProb', 'itSwProb', 'trialType', 'task', 'response'])
+    E_all = pd.DataFrame(columns=col_names)
     
     for bk in range(3):
         if order[bk] == 'Low':
@@ -50,9 +52,8 @@ def gen(SbjId):
             stimCat.extend([incompCat[i]]*NumItemPerCat)
             stimSwProb.extend(itSwProb)
                 
-    
-        E = pd.DataFrame(columns=['bk_id', 'trial_id', 'stimCat', 'stimId', 'bkSwProb', 'itSwProb', 'trialType', 'task', 'response'])
-    
+        E = pd.DataFrame(columns=col_names)
+
         for i in range(len(stimSet)):
             NumSw = int(trPerStim*stimSwProb[i]/100)         
             NumRp = int(trPerStim - NumSw)
@@ -69,12 +70,8 @@ def gen(SbjId):
             E = E.loc[seq, :].reset_index(drop=True)
             currentTask = np.remainder(round(np.random.rand()*100), 2)+1
     
-            for i in range(len(E)):
-                if E.loc[i, 'trialType'] == 'repeat':
-                    E.loc[i, 'task'] = currentTask
-                else:
-                    currentTask = 3-currentTask
-                    E.loc[i, 'task'] = currentTask
+            E.loc[E.trialType == 1, 'task'] = currentTask
+            E.loc[E.trialType != 1, 'task'] = 3-currentTask
     
             cnt = []
             expVal = len(E)/len(stimSet)/2
@@ -87,8 +84,6 @@ def gen(SbjId):
                 break
             
         E_all = pd.concat([E_all,E], ignore_index=True)
-    		
-        #print(E_all)
     
     #SRmapping  = [large small living nonliving]
     E_all.loc[ (E_all.task == 1) & (E_all.stimCat == 'LivLg'), 'response'] = SRmapping[0]
@@ -101,9 +96,8 @@ def gen(SbjId):
     E_all.loc[ (E_all.task == 2) & (E_all.stimCat == 'NLvLg'), 'response'] = SRmapping[3]
     E_all.loc[ (E_all.task == 2) & (E_all.stimCat == 'NLvSm'), 'response'] = SRmapping[3]
     
-    
     E_all.task = E_all.task.map({1:'size', 2:'animacy'})
-    E_all.to_csv("./MixedCCL_trial_sequence_" + str(SbjId) + ".csv",index=False)
+    E_all.to_csv("../data/mixedCCL_trial_sequence_" + str(SbjId) + ".csv",index=False)
     
 
 if __name__ == '__main__':

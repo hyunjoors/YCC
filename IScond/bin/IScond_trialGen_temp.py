@@ -1,23 +1,35 @@
 import sys
 import numpy as np
 import pandas as pd
-import random
 sys.path.insert(0, '../')
 
 def gen(SbjId=0): ##Hyun## a default SbjId is 0
-    SbjId = 13 ##Hyun## Remove later
+    SbjId = 13
+    # idx.bk_id     =1
+    # idx.trial_id = 2
+    # idx.stimCat = 3
+    # idx.stimId = 4
+    # idx.SRP = 5
+    # idx.trialType = 6
+    # idx.Rw = 7 # Rw = Reward amount
+    # idx.response = 8
     col_names = ['block_id', 'trial_id', 'stimCat', 'stimId', 'SRP', 'trialType', 'task', 'Rw', 'response']
 
-    MH = np.random.permutation(np.arange(1, 11, dtype=int)) # stimCat = 1
-    MS = np.random.permutation(np.arange(1, 11, dtype=int)) # stimCat = 2
-    FH = np.random.permutation(np.arange(1, 11, dtype=int)) # stimCat = 3
-    FS = np.random.permutation(np.arange(1, 11, dtype=int)) # stimCat = 4
-    
-    SRmapping_all = [['v','n', 'v', 'n'], ['v', 'n', 'n', 'v'], ['n', 'v', 'v', 'n'], ['n', 'v', 'n', 'v']] # which key to press for [large small living nonliving]
-    SRmapping = SRmapping_all[np.remainder(SbjId, 4)]
+    # MH = Shuffle([1:10])
+    # # stimCat = 1
+    # MS = Shuffle([1:10])
+    # # stimCat = 2
+    # FH = Shuffle([1:10])
+    # # sitmCat = 3
+    # FS = Shuffle([1:10])
+    # stimCat = 4
+    MH = np.random.permutation(np.arange(1, 11, dtype=int))
+    MS = np.random.permutation(np.arange(1, 11, dtype=int))
+    FH = np.random.permutation(np.arange(1, 11, dtype=int))
+    FS = np.random.permutation(np.arange(1, 11, dtype=int))
 
     #switchRewrd
-    switchRewardProb = [20] ##Hyun## why there is only one probability in the list?
+    switchRewardProb = [20, 50] ##Hyun## why there is only one probability in the list?
     NumTrialPerItem = 60
     HR = 10
     LR = 1
@@ -53,8 +65,7 @@ def gen(SbjId=0): ##Hyun## a default SbjId is 0
     while 1:
         seq = np.random.permutation(len(M))
         M1 = M.loc[seq, :].reset_index(drop=True)
-#        currentTask = np.remainder(round(np.random.rand()*100), 2)+1
-        currentTask = random.randint(1,2)
+        currentTask = np.remainder(round(np.random.rand()*100), 2)+1
 
         ### assign task like you did in the mixedCCL
         # 1. check there's roughly equal number of each task for each unique stimulus (see if that's possible to exit the while
@@ -62,12 +73,18 @@ def gen(SbjId=0): ##Hyun## a default SbjId is 0
         # there are 4 unique stimuls (1, 2, 3, 4)
         # there are 2 unique tasks/trialType (0, 1) <-- Please let me know if those are still 'switch' & 'repeat'
         
+        # for i in range(len(M)):
+        #     if M.loc[i, 'trialType'] == 1:
+        #         M.loc[i, 'task'] = currentTask
+        #     else:
+        #         currentTask = 3-currentTask
+        #         M.loc[i, 'task'] = currentTask
         M.loc[M.trialType == 1, 'task'] = currentTask
         M.loc[M.trialType != 1, 'task'] = 3-currentTask
 
         # 2. check to see if there's too many exact stimulus repetitoin(like in mixedCCL)
         cnt = []
-        expVal = len(M)/len(stimSetTotal)/2 ##Hyun## this value is 30
+        expVal = len(M)/len(stimSetTotal)/2
         for s in stimSetTotal:
             selection = M.loc[(M['stimId'] == s) & (M['task'] == 1)]
             cnt.append(len(selection))
@@ -82,8 +99,12 @@ def gen(SbjId=0): ##Hyun## a default SbjId is 0
         # 2. number of (task == 2 && reward == HR)
         # 3. number of (task == 1 && reward == LR)
         # 4. number of (task == 2 && reward == HR)
-        mean_task1 = M1.loc[(M1.task == 1), 'Rw'].mean()
-        mean_task2 = M1.loc[(M1.task == 2), 'Rw'].mean()
+        mean_task1 = M1.loc[(M1.task == 1) & (M1.Rw == LR), 'Rw'].mean()
+        mean_task2 = M1.loc[(M1.task == 1) & (M1.Rw == HR), 'Rw'].mean()
+        mean_task3 = M1.loc[(M1.task == 2) & (M1.Rw == LR), 'Rw'].mean()
+        mean_task4 = M1.loc[(M1.task == 2) & (M1.Rw == HR), 'Rw'].mean()
+        mean_task5 = M1.loc[(M1.task == 1), 'Rw'].mean()
+        mean_task6 = M1.loc[(M1.task == 2), 'Rw'].mean()
         # check1 = (sum(x <= 1 for x in abs(np.subtract(cnt, expVal))) == len(stimSetTotal))
         check1 = sum(x <= 1 for x in abs(np.subtract(cnt, expVal)))
         check2 = mean_task1 - mean_task2
@@ -93,15 +114,6 @@ def gen(SbjId=0): ##Hyun## a default SbjId is 0
             break
 
     M.task = M.task.map({1:'size', 2:'animacy'})
-    M.loc[ (M.task == 1) & (M.stimCat == 1), 'response'] = SRmapping[0] ##Hyun## Each condition set has 30 rows
-    M.loc[ (M.task == 1) & (M.stimCat == 2), 'response'] = SRmapping[0]
-    M.loc[ (M.task == 1) & (M.stimCat == 3), 'response'] = SRmapping[1]
-    M.loc[ (M.task == 1) & (M.stimCat == 4), 'response'] = SRmapping[1]
-    
-    M.loc[ (M.task == 2) & (M.stimCat == 1), 'response'] = SRmapping[2]
-    M.loc[ (M.task == 2) & (M.stimCat == 2), 'response'] = SRmapping[2]
-    M.loc[ (M.task == 2) & (M.stimCat == 3), 'response'] = SRmapping[3]
-    M.loc[ (M.task == 2) & (M.stimCat == 4), 'response'] = SRmapping[3]
     M.to_csv('../data/IScond_trial_sequence_' + str(SbjId) + ".csv", index=False)
 
 if __name__ == '__main__':

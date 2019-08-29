@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v3.1.2),
@@ -20,13 +20,12 @@ from numpy import (sin, cos, tan, log, log10, pi, average,
 from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
+sys.path.insert(0, './bin')
+sys.path.insert(0, './data')
+import csv_gen_practice
+import csv_gen_stroop
 
 from psychopy.hardware import keyboard
-
-sys.path.insert(0, './bin')
-from trialGen import practice, exp
-
-
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -34,7 +33,7 @@ os.chdir(_thisDir)
 
 # Store info about the experiment session
 psychopyVersion = '3.1.2'
-expName = 'stroop_outline'  # from the Builder filename that created this script
+expName = 'ISPC2'
 expInfo = {'participant': '', 'session': '001'}
 dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
 if dlg.OK == False:
@@ -42,13 +41,12 @@ if dlg.OK == False:
 expInfo['date'] = data.getDateStr()  # add a simple timestamp
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + \
-    u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + u'data/%s_%s' % (expName, expInfo['participant'])
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
                                  extraInfo=expInfo, runtimeInfo=None,
-                                 originPath='/Users/HyunJoo/Documents/Yu-Chin Lab/ISPC_new/stroop.py',
+                                 originPath='/Users/HyunJoo/Documents/Yu-Chin Lab/ISPC_new/bin/stroop.py',
                                  savePickle=True, saveWideText=True,
                                  dataFileName=filename)
 # save a log file for detail verbose info
@@ -62,7 +60,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=(1024, 768), fullscr=True, screen=0,
+    size=(1920, 1080), fullscr=True, screen=0,
     winType='pyglet', allowGUI=False, allowStencil=False,
     monitor='testMonitor', color=[0, 0, 0], colorSpace='rgb',
     blendMode='avg', useFBO=True,
@@ -119,7 +117,7 @@ prac_trial_blank_text = visual.TextStim(win=win, name='prac_trial_blank_text',
 
 # Initialize components for Routine "instr"
 instrClock = core.Clock()
-instr_body = "Unlike practice, you will now see names(instead of XXX) written across the face.\nIt may or may not be the name for the current face.\nYour task is to identify the face, not the name.\nIf the face is [George Clooney], press \'v\'\nIf the face is [Tom Cruise], press \'b\'\nIf the face is [Mat Damon], press \'n\'\n\nTry to respond as fast as you can without sacrificing the accuracy.\nUse ONLY your RIGHT INDEX finger to respond. [in bold & red]\n\nRaise your hand now if you have questions.\nElse, press space bar to start.\n"
+instr_body = "Unlike practice, you will now see names (instead of XXX) written across the face.\nIt may or may not be the name for the current face.\nYour task is to identify the face, not the name.\nIf the face is [George Clooney], press \'v\'\nIf the face is [Tom Cruise], press \'b\'\nIf the face is [Mat Damon], press \'n\'\n\nTry to respond as fast as you can without sacrificing the accuracy.\nUse ONLY your RIGHT INDEX finger to respond. [in bold & red]\n\nRaise your hand now if you have questions.\nElse, press space bar to start.\n"
 instr_text = visual.TextStim(win=win, name='instr_text',
                              text=instr_body,
                              font='Arial',
@@ -178,6 +176,10 @@ globalClock = core.Clock()  # to track the time since experiment started
 # to track time remaining of each (non-slip) routine
 routineTimer = core.CountdownTimer()
 
+
+
+
+
 # ------Prepare to start Routine "prac_instr"-------
 t = 0
 prac_instrClock.reset()  # clock
@@ -195,8 +197,12 @@ for thisComponent in prac_instrComponents:
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
 
+# generate trial sequences for the practice
+temp_fileName = csv_gen_practice.prompt() ################################################################################ this needs to be fixed 
+
+
 # -------Start Routine "prac_instr"-------
-while continueRoutine:
+while continueRoutine:#################################################################################### this needs to be when the instructor has pressed 'n' for no further practice trial
     # get current time
     t = prac_instrClock.getTime()
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
@@ -259,8 +265,7 @@ routineTimer.reset()
 # set up handler to look after randomisation of conditions etc
 prac_trials_loop = data.TrialHandler(nReps=1, method='sequential',
                                      extraInfo=expInfo, originPath=-1,
-                                     trialList=data.importConditions(
-                                         '../data/ISPC_squence_practice.csv'),
+                                     trialList=data.importConditions(temp_fileName),
                                      seed=None, name='prac_trials_loop')
 # so we can initialise stimuli with some values
 thisPrac_trials_loop = prac_trials_loop.trialList[0]
@@ -501,6 +506,21 @@ for thisPrac_trials_loop in prac_trials_loop:
             thisComponent.setAutoDraw(False)
 
 # completed 1 repeats of 'prac_trials_loop'
+###############################################################################################################################################################################################################
+##################################################################
+##################################################################
+################################# Need to keep track of the user input & report the result to the instructor
+################################# Need to ask the instructor whether to continue the practice or go to the next step
+#################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+
+
+
+
+
+
+
+
 
 
 # ------Prepare to start Routine "instr"-------
@@ -519,6 +539,9 @@ for thisComponent in instrComponents:
     thisComponent.tStopRefresh = None
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
+        
+# generate trial sequences for the practice
+temp_fileName = csv_gen_stroop.prompt() ################################################################################ this needs to be fixed 
 
 # -------Start Routine "instr"-------
 while continueRoutine:
@@ -611,8 +634,7 @@ for thisBlock_loop in block_loop:
     interval = str((blockCount-1)*72) + ":" + str(blockCount*72)
     trials_loop = data.TrialHandler(nReps=1, method='sequential',
                                     extraInfo=expInfo, originPath=-1,
-                                    trialList=data.importConditions(
-                                        '../data/ISPC_squence_shuffled.csv', selection=interval),
+                                    trialList=data.importConditions(temp_fileName, selection=interval), ########################################## Name of the file needs to be directed from csv_gen_stroop
                                     seed=None, name='trials_loop')
     # so we can initialise stimuli with some values
     thisTrials_loop = trials_loop.trialList[0] # this is a dictionary & trialList is a list of dictionary
