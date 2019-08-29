@@ -1,0 +1,96 @@
+21.6056 	WARNING 	Import Error: No module named 'psychtoolbox'. Using event module for keyboard component.
+26.7430 	WARNING 	User requested fullscreen with size [1920 1080], but screen is actually [1280, 800]. Using actual size
+29.4677 	WARNING 	Couldn't measure a consistent frame rate.
+  - Is your graphics card set to sync to vertical blank?
+  - Are you running other processes on your computer?
+
+29.4682 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color=array([0., 0., 0.]), colorSpace='rgb', fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x11e663cf8>, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x11b95f470>, multiSample=False, name='window1', numSamples=2, pos=[0.0, 0.0], screen=0, size=array([2560, 1600]), stereo=False, units='height', useFBO=True, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+29.8160 	EXP 	Created prac_instr_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='prac_instr_text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=array([255., 255., 255.]), text=str(...), units='height', win=Window(...), wrapWidth=1)
+29.8180 	EXP 	Created prac_trial_faceImage = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, image='sin', interpolate=True, mask=None, maskParams=None, name='prac_trial_faceImage', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128, units='height', win=Window(...))
+29.8286 	EXP 	Created prac_trial_nameText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='prac_trial_nameText', opacity=1.0, ori=0, pos=array([ 0. , -0.1]), rgb=array([255., 255., 255.]), text='default text', units='height', win=Window(...), wrapWidth=1)
+29.8342 	EXP 	Created pract_trial_feedback_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='pract_trial_feedback_text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=array([255., 255., 255.]), text='Time Out', units='height', win=Window(...), wrapWidth=1)
+29.8350 	EXP 	Created prac_trial_blank_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='prac_trial_blank_text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=array([255., 255., 255.]), text='', units='height', win=Window(...), wrapWidth=1)
+29.8661 	EXP 	Created prac_accuracy_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='prac_accuracy_text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=array([255., 255., 255.]), text=str(...), units='height', win=Window(...), wrapWidth=1)
+29.9261 	EXP 	Created instr_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='instr_text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=array([255., 255., 255.]), text=str(...), units='height', win=Window(...), wrapWidth=1)
+29.9280 	EXP 	Created trial_faceImage = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, image='sin', interpolate=True, mask=None, maskParams=None, name='trial_faceImage', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128, units='height', win=Window(...))
+29.9319 	EXP 	Created trial_nameText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='trial_nameText', opacity=1.0, ori=0, pos=array([ 0. , -0.1]), rgb=array([255., 255., 255.]), text='default text', units='height', win=Window(...), wrapWidth=1)
+29.9356 	EXP 	Created trial_feedback_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='trial_feedback_text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=array([255., 255., 255.]), text='Time Out', units='height', win=Window(...), wrapWidth=1)
+29.9365 	EXP 	Created trial_blank_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='trial_blank_text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=array([255., 255., 255.]), text='', units='height', win=Window(...), wrapWidth=1)
+29.9567 	EXP 	Created break_text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='break_text', opacity=1.0, ori=0, pos=array([0., 0.]), rgb=array([255., 255., 255.]), text=str(...), units='height', win=Window(...), wrapWidth=1)
+29.9880 	WARNING 	t of last frame was 520.49ms (=1/1)
+29.9880 	EXP 	prac_instr_text: autoDraw = True
+30.0533 	WARNING 	t of last frame was 28.78ms (=1/34)
+30.2552 	WARNING 	t of last frame was 20.96ms (=1/47)
+30.7374 	WARNING 	t of last frame was 25.87ms (=1/38)
+30.7749 	WARNING 	Multiple dropped frames have occurred - I'll stop bothering you about them!
+31.8806 	DATA 	Keypress: space
+31.9035 	EXP 	prac_instr_text: autoDraw = False
+31.9035 	EXP 	instr_text: autoDraw = True
+38.1934 	DATA 	Keypress: space
+38.3600 	EXP 	instr_text: autoDraw = False
+38.3600 	EXP 	trial_faceImage: size = array([0.405  , 0.50625])
+38.3600 	EXP 	trial_faceImage: image = './images/Damon.jpg'
+38.3600 	EXP 	trial_nameText: text = 'Clooney'
+38.4268 	EXP 	trial_feedback_text: text = 'Time Out'
+38.4268 	EXP 	trial_faceImage: autoDraw = True
+38.4268 	EXP 	trial_nameText: autoDraw = True
+38.4450 	EXP 	trial_feedback_text: text = 'Time Out'
+38.4603 	EXP 	trial_feedback_text: text = 'Time Out'
+38.4785 	EXP 	trial_feedback_text: text = 'Time Out'
+38.4942 	EXP 	trial_feedback_text: text = 'Time Out'
+38.5169 	EXP 	trial_feedback_text: text = 'Time Out'
+38.5359 	EXP 	trial_feedback_text: text = 'Time Out'
+38.5532 	EXP 	trial_feedback_text: text = 'Time Out'
+38.5725 	EXP 	trial_feedback_text: text = 'Time Out'
+38.5875 	EXP 	trial_feedback_text: text = 'Time Out'
+38.6057 	EXP 	trial_feedback_text: text = 'Time Out'
+38.6208 	EXP 	trial_feedback_text: text = 'Time Out'
+38.6387 	EXP 	trial_feedback_text: text = 'Time Out'
+38.6551 	EXP 	trial_feedback_text: text = 'Time Out'
+38.6730 	EXP 	trial_feedback_text: text = 'Time Out'
+38.6891 	EXP 	trial_feedback_text: text = 'Time Out'
+38.7068 	EXP 	trial_feedback_text: text = 'Time Out'
+38.7228 	EXP 	trial_feedback_text: text = 'Time Out'
+38.7408 	EXP 	trial_feedback_text: text = 'Time Out'
+38.7558 	EXP 	trial_feedback_text: text = 'Time Out'
+38.7735 	EXP 	trial_feedback_text: text = 'Time Out'
+38.7892 	EXP 	trial_feedback_text: text = 'Time Out'
+38.8086 	EXP 	trial_feedback_text: text = 'Time Out'
+38.8255 	EXP 	trial_feedback_text: text = 'Time Out'
+38.8438 	EXP 	trial_feedback_text: text = 'Time Out'
+38.8605 	EXP 	trial_feedback_text: text = 'Time Out'
+38.8786 	EXP 	trial_feedback_text: text = 'Time Out'
+38.8952 	EXP 	trial_feedback_text: text = 'Time Out'
+38.9161 	EXP 	trial_feedback_text: text = 'Time Out'
+38.9356 	EXP 	trial_feedback_text: text = 'Time Out'
+38.9520 	EXP 	trial_feedback_text: text = 'Time Out'
+38.9714 	EXP 	trial_feedback_text: text = 'Time Out'
+38.9888 	EXP 	trial_feedback_text: text = 'Time Out'
+39.0098 	EXP 	trial_feedback_text: text = 'Time Out'
+39.0253 	EXP 	trial_feedback_text: text = 'Time Out'
+39.0446 	EXP 	trial_feedback_text: text = 'Time Out'
+39.0618 	EXP 	trial_feedback_text: text = 'Time Out'
+39.0818 	EXP 	trial_feedback_text: text = 'Time Out'
+39.1020 	EXP 	trial_feedback_text: text = 'Time Out'
+39.1180 	EXP 	trial_feedback_text: text = 'Time Out'
+39.1376 	EXP 	trial_feedback_text: text = 'Time Out'
+39.1539 	EXP 	trial_feedback_text: text = 'Time Out'
+39.1720 	EXP 	trial_feedback_text: text = 'Time Out'
+39.1882 	EXP 	trial_feedback_text: text = 'Time Out'
+39.2064 	EXP 	trial_feedback_text: text = 'Time Out'
+39.2220 	EXP 	trial_feedback_text: text = 'Time Out'
+39.2401 	EXP 	trial_feedback_text: text = 'Time Out'
+39.2562 	EXP 	trial_feedback_text: text = 'Time Out'
+39.2747 	EXP 	trial_feedback_text: text = 'Time Out'
+39.2916 	EXP 	trial_feedback_text: text = 'Time Out'
+39.3106 	EXP 	trial_feedback_text: text = 'Time Out'
+39.3262 	EXP 	trial_feedback_text: text = 'Time Out'
+39.3451 	EXP 	trial_feedback_text: text = 'Time Out'
+39.3617 	EXP 	trial_feedback_text: text = 'Time Out'
+39.3820 	EXP 	trial_feedback_text: text = 'Time Out'
+39.4027 	EXP 	trial_feedback_text: text = 'Time Out'
+39.4186 	EXP 	trial_faceImage: autoDraw = False
+39.4186 	EXP 	trial_nameText: autoDraw = False
+39.4186 	EXP 	trial_feedback_text: autoDraw = True
+39.7553 	DATA 	Keypress: escape
+40.0938 	EXP 	window1: mouseVisible = True

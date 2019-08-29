@@ -1,31 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-This experiment was created using PsychoPy3 Experiment Builder (v3.1.2),
-    on Tue Aug  6 04:02:41 2019
-If you publish work using this script please cite the PsychoPy publications:
-    Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
-        Journal of Neuroscience Methods, 162(1-2), 8-13.
-    Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy.
-        Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
-"""
 
 from __future__ import absolute_import, division
 from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
-import numpy as np  # whole numpy lib is available, prepend 'np.'
-from numpy import (sin, cos, tan, log, log10, pi, average,
-                   sqrt, std, deg2rad, rad2deg, linspace, asarray)
-from numpy.random import random, randint, normal, shuffle
+from psychopy.hardware import keyboard
 import os  # handy system and path functions
 import sys  # to get file system encoding
-sys.path.insert(0, './bin')
-sys.path.insert(0, './data')
-import csv_gen_practice
-import csv_gen_stroop
+sys.path.append('./bin')
+sys.path.append('./data')
+from bin.ISPC_v2_trialGen import ISPC_v2_trialGen
 
-from psychopy.hardware import keyboard
+
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -33,12 +20,20 @@ os.chdir(_thisDir)
 
 # Store info about the experiment session
 psychopyVersion = '3.1.2'
-expName = 'ISPC2'
+expName = 'ISPC_v2'
 expInfo = {'participant': '', 'session': '001'}
 dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
 expInfo['date'] = data.getDateStr()  # add a simple timestamp
+
+# generate trial sequences
+csv_gen = ISPC_v2_trialGen(expInfo['participant'])
+m_practice = csv_gen.practice()
+m_exp = csv_gen.exp()
+print("data generated")
+
+
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
 filename = _thisDir + os.sep + u'data/%s_%s' % (expName, expInfo['participant'])
@@ -46,7 +41,7 @@ filename = _thisDir + os.sep + u'data/%s_%s' % (expName, expInfo['participant'])
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
                                  extraInfo=expInfo, runtimeInfo=None,
-                                 originPath='/Users/HyunJoo/Documents/Yu-Chin Lab/ISPC_new/bin/stroop.py',
+                                 originPath='/Users/HyunJoo/Documents/Yu-Chin Lab/ISPC_v2/stroop.py',
                                  savePickle=True, saveWideText=True,
                                  dataFileName=filename)
 # save a log file for detail verbose info
@@ -197,10 +192,6 @@ for thisComponent in prac_instrComponents:
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
 
-# generate trial sequences for the practice
-temp_fileName = csv_gen_practice.prompt() ################################################################################ this needs to be fixed 
-
-
 # -------Start Routine "prac_instr"-------
 while continueRoutine:#################################################################################### this needs to be when the instructor has pressed 'n' for no further practice trial
     # get current time
@@ -263,24 +254,28 @@ for thisComponent in prac_instrComponents:
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-prac_trials_loop = data.TrialHandler(nReps=1, method='sequential',
-                                     extraInfo=expInfo, originPath=-1,
-                                     trialList=data.importConditions(temp_fileName),
-                                     seed=None, name='prac_trials_loop')
-# so we can initialise stimuli with some values
-thisPrac_trials_loop = prac_trials_loop.trialList[0]
-# abbreviate parameter names if possible (e.g. rgb = thisPrac_trials_loop.rgb)
-if thisPrac_trials_loop != None:
-    for paramName in thisPrac_trials_loop:
-        exec('{} = thisPrac_trials_loop[paramName]'.format(paramName))
-
-for thisPrac_trials_loop in prac_trials_loop:
+##Hyun## convert to pandas trial handling version
+# delete if pandas work
+# prac_trials_loop = data.TrialHandler(nReps=1, method='sequential',
+#                                      extraInfo=expInfo, originPath=-1,
+#                                      trialList=m_practice, #data.importConditions(temp_fileName),
+# #                                      seed=None, name='prac_trials_loop')
+# # so we can initialise stimuli with some values
+# thisPrac_trials_loop = prac_trials_loop.trialList[0]
+# # abbreviate parameter names if possible (e.g. rgb = thisPrac_trials_loop.rgb)
+# if thisPrac_trials_loop != None:
+#     for paramName in thisPrac_trials_loop:
+#         exec('{} = thisPrac_trials_loop[paramName]'.format(paramName))
+# for thisPrac_trials_loop in prac_trials_loop:
+##Hyun##
+for i, trial in m_practice.iterrows():
     currentLoop = prac_trials_loop
     # abbreviate parameter names if possible (e.g. rgb = thisPrac_trials_loop.rgb)
-    if thisPrac_trials_loop != None:
-        for paramName in thisPrac_trials_loop:
-            exec('{} = thisPrac_trials_loop[paramName]'.format(paramName))
-
+##Hyun##
+    # if thisPrac_trials_loop != None:
+    #     for paramName in thisPrac_trials_loop:
+    #         exec('{} = thisPrac_trials_loop[paramName]'.format(paramName))
+##Hyun##
     # ------Prepare to start Routine "prac_trial_routine"-------
     t = 0
     prac_trial_routineClock.reset()  # clock
@@ -539,9 +534,6 @@ for thisComponent in instrComponents:
     thisComponent.tStopRefresh = None
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
-        
-# generate trial sequences for the practice
-temp_fileName = csv_gen_stroop.prompt() ################################################################################ this needs to be fixed 
 
 # -------Start Routine "instr"-------
 while continueRoutine:
