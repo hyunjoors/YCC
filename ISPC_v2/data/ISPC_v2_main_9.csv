@@ -1,0 +1,10 @@
+,bid,congruency,corrResp,face_path,fid,nid,sbjCorr,sbjRT,sbjResp,tid
+0,1,congruent,n,./images/Cruise.jpg,Cruise,Cruise,incorrect,-1,,1
+1,1,incongruent,n,./images/Cruise.jpg,Cruise,Damon,incorrect,-1,,2
+2,1,congruent,b,./images/Clooney.jpg,Clooney,Clooney,correct,0.6248002460051794,b,3
+3,1,incongruent,b,./images/Clooney.jpg,Clooney,Cruise,correct,0.39550580698414706,b,4
+4,1,incongruent,b,./images/Clooney.jpg,Clooney,Damon,correct,0.5228793530259281,b,5
+5,1,incongruent,v,./images/Damon.jpg,Damon,Clooney,incorrect,-1,,6
+6,1,incongruent,n,./images/Cruise.jpg,Cruise,Clooney,incorrect,-1,,7
+7,1,congruent,v,./images/Damon.jpg,Damon,Damon,incorrect,-1,,8
+8,1,incongruent,v,./images/Damon.jpg,Damon,Cruise,incorrect,-1,,9

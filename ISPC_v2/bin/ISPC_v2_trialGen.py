@@ -73,15 +73,15 @@ class ISPC_v2_trialGen:
         # record all the column names, type (integer, text, etc)
         data = {
             "bid": 5,
-            "tid": 72,
+            "tid": 9,
             "fid": ["Clooney", "Cruise", "Damon"],
             "nid": ["Clooney", "Cruise", "Damon"],
             "corrResp": {}
         }
         M = np.array([[0, 0, 0, 0],
-                      [0, 18, 18, 18],
-                      [0, 3, 3, 3],
-                      [0, 3, 3, 3]], dtype = object)
+                      [0, 1, 1, 1],
+                      [0, 1, 1, 1],
+                      [0, 1, 1, 1]], dtype = object)
     
         for i in range(3):
             M[0, i+1] = data["fid"][i]
