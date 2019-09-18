@@ -29,17 +29,19 @@ expInfo['date'] = data.getDateStr()  # add a simple timestamp
 # generate trial sequences
 csv_gen = ISPC_v2_trialGen(expInfo['participant'])
 m_prac, map_prac = csv_gen.practice()
-prac_instr_body = ''.join([
+prac_instr_body1 = ''.join([
     "Your task here is to identify the \"face\" presented on each trial by pressing the designated key.\n",
+    "Your task is to identify the face, not the name.\n",
     "If the face is [%s], press \'%s\'\n",
     "If the face is [%s], press \'%s\'\n",
     "If the face is [%s], press \'%s\'\n\n",
-    "Try to respond as fast as you can without sacrificing the accuracy.\n",
-    "Use ONLY your RIGHT INDEX finger to respond. [in bold & red]\n\n",
-    "Raise your hand now if you have questions.\n",
-    "Else, press space bar to start.\n"
+    "Try to respond as fast as you can without sacrificing the accuracy.\n"
 ]) % (map_prac[0][0], map_prac[0][1], map_prac[1][0], map_prac[1][1], map_prac[2][0], map_prac[2][1])
-
+prac_instr_body2 = "Use ONLY your RIGHT HAND's index, middle and ring fingers to press the v/b/n keys."
+prac_instr_body3 = ''.join([
+    "Raise your hand now if you have questions.\n",
+    "Else, press space bar to start."
+])
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
 filename = _thisDir + os.sep + \
@@ -49,12 +51,12 @@ filename = _thisDir + os.sep + \
 thisExp = data.ExperimentHandler(name=expName, version='',
                                  extraInfo=expInfo, runtimeInfo=None,
                                  originPath='/Users/HyunJoo/Documents/Yu-Chin Lab/ISPC_v2/stroop.py',
-                                 savePickle=True, saveWideText=True,
+                                 savePickle=False, saveWideText=False,
                                  dataFileName=filename)
 # save a log file for detail verbose info
-logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-# this outputs to the screen, not a file
-logging.console.setLevel(logging.WARNING)
+# logFile = logging.LogFile(filename+'.log', level=logging.EXP)
+# # this outputs to the screen, not a file
+# logging.console.setLevel(logging.WARNING)
 
 endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
@@ -73,13 +75,30 @@ defaultKeyboard = keyboard.Keyboard()
 
 # Initialize components for Routine "prac_instr"
 prac_instrClock = core.Clock()
-prac_instr_text = visual.TextStim(win=win, name='prac_instr_text',
-                                  text=prac_instr_body,
-                                  font='Arial',
-                                  pos=(0, 0), height=0.04, wrapWidth=None, ori=0,
-                                  color='white', colorSpace='rgb', opacity=1,
-                                  languageStyle='LTR',
-                                  depth=0.0)
+prac_instr_text1 = visual.TextStim(win=win, name='prac_instr_text1',
+                             text=prac_instr_body1,
+                             font='Arial',
+                             pos=(-0.5, 0.07), height=0.04, wrapWidth=None, ori=0,
+                             color='white', colorSpace='rgb', opacity=1,
+                             alignHoriz='left', languageStyle='LTR',
+                             depth=0.0)
+# Initialize components for Routine "instr"
+prac_instr_text2 = visual.TextStim(win=win, name='prac_instr_text2',
+                             text=prac_instr_body2,
+                             font='Arial',
+                             pos=(-0.5, -0.2), height=0.04, wrapWidth=None, ori=0,
+                             color='red', colorSpace='rgb', opacity=1,
+                             bold=True, alignHoriz='left', languageStyle='LTR',
+                             depth=0.0)
+# Initialize components for Routine "instr"
+prac_instr_text3 = visual.TextStim(win=win, name='prac_instr_text3',
+                             text=prac_instr_body3,
+                             font='Arial',
+                             pos=(-0.5, -0.3), height=0.04, wrapWidth=None, ori=0,
+                             color='white', colorSpace='rgb', opacity=1,
+                             alignHoriz='left', languageStyle='LTR',
+                             depth=0.0)
+
 
 # Initialize components for Routine "prac_trial_routine"
 prac_trial_routineClock = core.Clock()
@@ -94,8 +113,8 @@ prac_trial_faceImage = visual.ImageStim(
 prac_trial_nameText = visual.TextStim(win=win, name='prac_trial_nameText',
                                       text='default text',
                                       font='Arial',
-                                      pos=(0, -0.1), height=0.1, wrapWidth=None, ori=0,
-                                      color='white', colorSpace='rgb', opacity=1,
+                                      pos=(0, -0.05), height=0.06, wrapWidth=None, ori=0,
+                                      color='red', colorSpace='rgb', opacity=1,
                                       languageStyle='LTR',
                                       depth=-2.0)
 
@@ -139,7 +158,7 @@ continueRoutine = True
 # update component parameters for each repeat
 instr_prac_key_resp = keyboard.Keyboard()
 # keep track of which components have finished
-prac_instrComponents = [prac_instr_text, instr_prac_key_resp]
+prac_instrComponents = [prac_instr_text1, prac_instr_text2, prac_instr_text3, instr_prac_key_resp]
 for thisComponent in prac_instrComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -155,14 +174,30 @@ while continueRoutine:
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
 
-    # *prac_instr_text* updates
-    if t >= 0.0 and prac_instr_text.status == NOT_STARTED:
+    # *prac_instr_text1* updates
+    if t >= 0.0 and prac_instr_text1.status == NOT_STARTED:
         # keep track of start time/frame for later
-        prac_instr_text.tStart = t  # not accounting for scr refresh
-        prac_instr_text.frameNStart = frameN  # exact frame index
+        prac_instr_text1.tStart = t  # not accounting for scr refresh
+        prac_instr_text1.frameNStart = frameN  # exact frame index
         # time at next scr refresh
-        win.timeOnFlip(prac_instr_text, 'tStartRefresh')
-        prac_instr_text.setAutoDraw(True)
+        win.timeOnFlip(prac_instr_text1, 'tStartRefresh')
+        prac_instr_text1.setAutoDraw(True)
+    # *prac_instr_text2* updates
+    if t >= 0.0 and prac_instr_text2.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        prac_instr_text2.tStart = t  # not accounting for scr refresh
+        prac_instr_text2.frameNStart = frameN  # exact frame index
+        # time at next scr refresh
+        win.timeOnFlip(prac_instr_text2, 'tStartRefresh')
+        prac_instr_text2.setAutoDraw(True)
+    # *prac_instr_tex3t* updates
+    if t >= 0.0 and prac_instr_text3.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        prac_instr_text3.tStart = t  # not accounting for scr refresh
+        prac_instr_text3.frameNStart = frameN  # exact frame index
+        # time at next scr refresh
+        win.timeOnFlip(prac_instr_text3, 'tStartRefresh')
+        prac_instr_text3.setAutoDraw(True)
 
     # *instr_prac_key_resp* updates
     if t >= 0.0 and instr_prac_key_resp.status == NOT_STARTED:
@@ -289,10 +324,10 @@ while 1:
                         prac_trial_key_resp.rt = theseKeys.rt
                         # was this 'correct'?
                         if (prac_trial_key_resp.keys == str(currentTrial.corrResp)) or (prac_trial_key_resp.keys == currentTrial.corrResp):
-                            prac_trial_key_resp.corr = 'correct'
+                            prac_trial_key_resp.corr = 1
                             pract_trial_feedback_text.setText("Correct")
                         else:
-                            prac_trial_key_resp.corr = 'incorrect'
+                            prac_trial_key_resp.corr = 0
                             pract_trial_feedback_text.setText("Incorrect")
                         # a response ends the routine
                         continueRoutine = False
@@ -473,7 +508,7 @@ while 1:
         frameN = frameN + 1 # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         n_trial = len(m_prac)
-        n_corr = len(m_prac.loc[(m_prac.sbjCorr == 'correct')])
+        n_corr = len(m_prac.loc[(m_prac.sbjCorr == 1)])
         prac_accuracy_body = 'Your Accuracy {}%\n\nRaise your hand to get an instructor.\n\nPress \'escape\' to quit the practice.\nPress \'r\' to repeat the practice'.format(n_corr/n_trial*100)
         prac_accuracy_text.setText(prac_accuracy_body)
 
