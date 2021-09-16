@@ -1,1 +1,1 @@
-# PsychoPy
+# Online psychological experiments using PsychoPy
